@@ -65,7 +65,7 @@ int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)
 /*==================[external functions definition]==========================*/
 
 void app_main(void){
-    uint8_t bcd_array[5]; // arreglo para almacenar hasta 5 dígitos BCD
+    uint8_t bcd_array[5];
 
     // Ejemplo: convertir 12345 a BCD con 5 dígitos
     int8_t result = convertToBcdArray(12345, 5, bcd_array);
