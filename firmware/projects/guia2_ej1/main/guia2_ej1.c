@@ -55,14 +55,45 @@
 #include "switch.h"
 
 /*==================[macros and definitions]=================================*/
+/**
+ * @brief GPIO de ECHO para el sensor HC-SR04.
+ */
 #define HC_SR04_ECHO_GPIO   GPIO_3
+
+/**
+ * @brief GPIO de TRIGGER para el sensor HC-SR04.
+ */
 #define HC_SR04_TRIGGER_GPIO GPIO_2
 
-#define DISTANCE_THRESHOLD_1 10  // cm
-#define DISTANCE_THRESHOLD_2 20  // cm
-#define DISTANCE_THRESHOLD_3 30  // cm
+/**
+ * @brief Umbral de distancia 1 en centímetros.
+ *
+ * Distancias menores a este valor apagan todos los LEDs.
+ */
+#define DISTANCE_THRESHOLD_1 10
 
+/**
+ * @brief Umbral de distancia 2 en centímetros.
+ *
+ * Distancias entre el umbral 1 y este valor encienden LED_1.
+ */
+#define DISTANCE_THRESHOLD_2 20
+
+/**
+ * @brief Umbral de distancia 3 en centímetros.
+ *
+ * Distancias entre el umbral 2 y este valor encienden LED_1 y LED_2.
+ */
+#define DISTANCE_THRESHOLD_3 30
+
+/**
+ * @brief Periodo de medición en milisegundos.
+ */
 #define MEASUREMENT_PERIOD_MS 1000  // 1 segundo
+
+/**
+ * @brief Periodo de lectura de switches en milisegundos.
+ */
 #define KEY_READ_PERIOD_MS 10       // 10 milisegundos
 
 /*==================[internal data definition]===============================*/
@@ -71,7 +102,14 @@ static bool hold_mode = false;      /*!< Flag para modo HOLD */
 static uint16_t last_distance = 0;  /*!< Última distancia medida */
 static int8_t last_switches = 0;    /*!< Estado anterior de switches */
 
+/**
+ * @brief Handle de la tarea principal de medición de distancia.
+ */
 TaskHandle_t measurement_task_handle = NULL;
+
+/**
+ * @brief Handle de la tarea de lectura de switches.
+ */
 TaskHandle_t key_read_task_handle = NULL;
 
 /*==================[internal functions declaration]=========================*/
@@ -177,6 +215,12 @@ static void ControlLedsBasedOnDistance(uint16_t distance) {
 }
 
 /*==================[external functions definition]==========================*/
+/**
+ * @brief Función de entrada principal de la aplicación.
+ *
+ * Inicializa los periféricos (LEDs, sensor HC-SR04, LCD y switches) y crea
+ * las tareas de lectura de teclas y medición periódica.
+ */
 void app_main(void) {
    
     // Inicializar LEDs
