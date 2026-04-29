@@ -54,9 +54,9 @@ int8_t SwitchesRead(void);
  * 
  * @param tec Selected switch
  * @param ptrIntFunc Pointer to callback function
- * @param args Pointer to callback function parameters
+ * @param args Pointer to callback function parameterss
  */
-void SwitchActivInt(switch_t tec, void *ptrIntFunc, void *args);
+void SwitchActivInt(switch_t tec, void *ptrIntFunc, void *args); /* llamo a esta función una vez para cada tecla que quiera configurar*/
 
 /** @} doxygen end group definition */
 /** @} doxygen end group definition */
