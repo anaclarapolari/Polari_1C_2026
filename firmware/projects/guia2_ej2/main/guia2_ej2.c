@@ -83,10 +83,8 @@ static void MeasurementTimerCallback(void *param) {
             if (last_distance <= 999) {
                 LcdItsE0803Write(last_distance);
             }
-        } else {
-            // Cuando no está midiendo, apagar todo
-            LedsOffAll();
-            LcdItsE0803Off();
+    } else {
+            LcdItsE0803Write(last_distance);
         }
     }
 }
@@ -153,6 +151,6 @@ void app_main(void) {
         .param_p = NULL
     };
     TimerInit(&timer_config);
-    TimerStart(TIMER_A);
-
+	TimerStart(TIMER_A);
+}
 /*==================[end of file]============================================*/

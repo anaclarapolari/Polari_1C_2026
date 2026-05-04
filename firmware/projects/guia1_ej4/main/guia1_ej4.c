@@ -1,31 +1,18 @@
-/*! @mainpage Template
- *
+/*! @mainpage Conversión de enteros a arreglo de dígitos (BCD).
+
  * @section genDesc General Description
  *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
- *
- * @section hardConn Hardware Connection
- *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
- *
- *
- * @section changelog Changelog
- *
- * |   Date	    | Description                                    |
- * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * El programa toma un número entero de 32 bits y lo descompone en sus dígitos 
+ * decimales individuales, almacenándolos en un arreglo de bytes, y los muestra en consola.
  *
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *
  */
-
 /*==================[inclusions]=============================================*/
+
 #include <stdio.h>
 #include <stdint.h>
+
 /*==================[macros and definitions]=================================*/
 
 /*==================[internal data definition]===============================*/
@@ -34,50 +21,45 @@
 
 /*==================[external functions definition]==========================*/
 
-int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)
+int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number) // los parámetros son el número a convertir,
+                                                                                //la cantidad de dígitos y un puntero al lugar donde
+                                                                                // se va a guardar 
 {
     if (bcd_number == NULL || digits == 0) {
-        return -1; // parámetros inválidos
+        return -1; // parámetros inválidos, devuelve -1
     }
-
-    // Llenar con ceros por si data tiene menos dígitos que `digits`
-    for (uint8_t i = 0; i < digits; i++) {
+    
+    for (uint8_t i = 0; i < digits; i++)  {  // inicialización: llenar con ceros
         bcd_number[i] = 0;
     }
 
-    // Se llena de derecha a izquierda (digit menos significativo primero)
-    for (int i = digits - 1; i >= 0; i--) {
-        bcd_number[i] = data % 10;
-        data /= 10;
+    for (int i = digits - 1; i >= 0; i--){  // se llena de derecha a izquierda (digito menos significativo primero)
+        bcd_number[i] = data % 10; //obtiene el resto de dividir por 10 (último digito)
+        data /= 10; // "saca" el último dígito del número, división entera
         if (data == 0) {
             break;
         }
     }
-
-    // Si queda data > 0, entonces no entró en el arreglo (overflow de dígitos)
-    if (data != 0) {
+    
+    if (data != 0){  // si queda data > 0, entonces no entró en el arreglo (overflow de dígitos)
         return -2;
     }
 
     return 0; // éxito
 }
 
-/*==================[external functions definition]==========================*/
-
 void app_main(void){
-    uint8_t bcd_array[5];
+    uint8_t bcd_array[5]; // vector para almacenar en memoria
 
-    // Ejemplo: convertir 12345 a BCD con 5 dígitos
-    int8_t result = convertToBcdArray(12345, 5, bcd_array);
+    int8_t result = convertToBcdArray(12345, 5, bcd_array); // Ejemplo: convertir 12345 a BCD con 5 dígitos
 
     if(result == 0){
-        printf("BCD convertido exitosamente: ");
         for(uint8_t i = 0; i < 5; i++){
             printf("%d ", bcd_array[i]);
         }
         printf("\n");
     } else {
-        printf("Error en la conversión: %d\n", result);
+        printf("Error en la conversión: %d\n", result); // se va a mostrar -1 o -2 según cual sea el error
     }
 }
 
