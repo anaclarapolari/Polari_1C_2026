@@ -1,18 +1,20 @@
 /*! @mainpage Proyecto 1 Ejercicio 6 - Display Multiplexado con Código BCD
  *
  * @section genDesc General Description
+ * 
+ * Resuelve el ejercicio 6 del proyecto 1: 
+ * 
+ *      Escriba una función que reciba un dato de 32 bits,  la cantidad de dígitos de salida 
+ *      y dos vectores de estructuras del tipo  gpioConf_t. Uno  de estos vectores es igual al 
+ *      definido en el punto anterior y el otro vector mapea los puertos con el dígito del LCD 
+ *      a donde mostrar un dato:
+ * 
+ *              Dígito 1 -> GPIO_19
+ *              Dígito 2 -> GPIO_18
+ *              Dígito 3 -> GPIO_9
  *
- * Este programa implementa un sistema de multiplexación de display de 7 segmentos
- * usando código BCD para controlar los segmentos.
- * El ejercicio demuestra el funcionamiento de:
- *   - Conversión de números decimales a BCD
- *   - Multiplexación de dígitos de display
- *   - Control de GPIOs para configurar el BCD
- *   - Control de GPIOs para seleccionar dígitos
- *
- * El programa muestra el valor 123 en un display de 3 dígitos.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ *      La función deberá mostrar por display el valor que recibe. Reutilice las funciones 
+ *      creadas en el punto 4 y 5. Realice la documentación de este ejercicio usando Doxygen.
  *
  * @section hardConn Hardware Connection
  *
@@ -32,12 +34,10 @@
  * |   Dígito 3  |  GPIO_9   |
  *
  * @note Los pines GPIO se configuran como salidas digitales (OUTPUT).
- * @note El control de dígitos es activo en alto (HIGH = dígito activado).
  * 
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *
  */
-
 /*==================[inclusions]=============================================*/
 
 #include <stdio.h>
@@ -48,17 +48,18 @@
 #include "freertos/task.h"
 
 /*==================[macros and definitions]=================================*/
-
 /**
  * @brief Estructura de configuración de GPIO para el mapeo de pines
  * 
  * Esta estructura almacena la información necesaria para configurar y controlar
  * un pin GPIO específico en el ESP32.
  */
-typedef struct
+
+typedef struct  // uso typedef para no tener que escribir struct cada vez que me 
+                //quiero referir a gpioConf_t (tipo de dato) 
 {
-    gpio_t pin;      /*!< Número del pin GPIO a controlar */
-    io_t dir;        /*!< Dirección del GPIO: GPIO_INPUT (0) o GPIO_OUTPUT (1) */
+	gpio_t pin;			// número de GPIO
+	io_t dir;			// input - output (0 o 1)
 } gpioConf_t;
 
 /*==================[internal data definition]===============================*/
@@ -70,11 +71,11 @@ typedef struct
  * y sus correspondientes pines GPIO en el ESP32.
  * Estos pines controlan los segmentos individuales del display de 7 segmentos.
  */
-gpioConf_t bcdGpioMap[4] = {
-    {GPIO_20, GPIO_OUTPUT},  /**< B0 -> GPIO_20 (bit 0 del BCD) */
-    {GPIO_21, GPIO_OUTPUT},  /**< B1 -> GPIO_21 (bit 1 del BCD) */
-    {GPIO_22, GPIO_OUTPUT},  /**< B2 -> GPIO_22 (bit 2 del BCD) */
-    {GPIO_23, GPIO_OUTPUT}   /**< B3 -> GPIO_23 (bit 3 del BCD) */
+gpioConf_t bcdGpioMap[4] = {    //mapear es relacionar cada bit con un pin de GPIO específico
+    {GPIO_20, GPIO_OUTPUT},  // b0 -> GPIO_20
+    {GPIO_21, GPIO_OUTPUT},  // b1 -> GPIO_21
+    {GPIO_22, GPIO_OUTPUT},  // b2 -> GPIO_22
+    {GPIO_23, GPIO_OUTPUT}   // b3 -> GPIO_23
 };
 
 /**
@@ -84,7 +85,7 @@ gpioConf_t bcdGpioMap[4] = {
  * de 7 segmentos y sus correspondientes pines GPIO en el ESP32.
  * Estos pines se utilizan para seleccionar cuál dígito se mostrará (multiplexación).
  */
-gpioConf_t digitGpioMap[3] = {
+gpioConf_t digitGpioMap[3] = {  // es para controlar qué dígito del display se activa
     {GPIO_19, GPIO_OUTPUT},  /**< Dígito 1 -> GPIO_19 */
     {GPIO_18, GPIO_OUTPUT},  /**< Dígito 2 -> GPIO_18 */
     {GPIO_9,  GPIO_OUTPUT}   /**< Dígito 3 -> GPIO_9 */
@@ -111,7 +112,7 @@ gpioConf_t digitGpioMap[3] = {
  * @note El arreglo bcd_number se inicializa con ceros antes de la conversión.
  * @note Los dígitos se rellenan alineados a la derecha (los ceros iniciales quedan a la izquierda).
  */
-int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)
+int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number) //ejercicio 4
 {
     if (bcd_number == NULL || digits == 0) {
         return -1;
@@ -149,17 +150,20 @@ int8_t convertToBcdArray(uint32_t data, uint8_t digits, uint8_t *bcd_number)
  * @note Los pines se configuran como GPIO_OUTPUT.
  *
  */
-void setBCDToGPIOs(uint8_t bcdDigit, gpioConf_t *gpioConfigs)
+void setBCDToGPIOs(uint8_t bcdDigit, gpioConf_t *gpioConfigs) //ejercicio 5
 {
+
     for (int i = 0; i < 4; i++) {
-        GPIOInit(gpioConfigs[i].pin, gpioConfigs[i].dir);
+        GPIOInit(gpioConfigs[i].pin, gpioConfigs[i].dir); // inicializa los GPIO como salidas
     }
-    for (int i = 0; i < 4; i++) {
-        bool bitState = (bcdDigit & (1 << i)) != 0;
-        GPIOState(gpioConfigs[i].pin, bitState);
+
+    for (int i = 0; i < 4; i++) {      //hasta 4, porque un dígito BCD tiene 4 bits
+        
+        bool bitState = (bcdDigit & (1 << i)) != 0;  // la máscara desplaza el 1 a la izquierda en cada ciclo, 
+                                                    // cuando coincide con bcdDigit, devuelve 1
+        GPIOState(gpioConfigs[i].pin, bitState);     // setea CADA GPIO según el 0 o 1 que obtuvo antes
     }
 }
-
 /**
  * @brief Muestra un valor numérico en un display multiplexado de 7 segmentos
  * 
@@ -186,30 +190,26 @@ void displayValueOnDigits(uint32_t data, uint8_t digits, gpioConf_t *mapBcd, gpi
     if (digits == 0 || digits > 3) {
         return;
     }
-    // Inicializa los GPIOs de dígito (desactivados inicialmente)
+
     for (int d = 0; d < digits; d++) {
-        GPIOInit(mapDigits[d].pin, mapDigits[d].dir);
-        GPIOState(mapDigits[d].pin, 0);
+        GPIOInit(mapDigits[d].pin, mapDigits[d].dir);  // inicializa los GPIO como salida
+        GPIOState(mapDigits[d].pin, 0);  // apaga todos los GPIO de selección de dígitos
     }
 
-    // Convertir data a arreglo BCD
     uint8_t bcd_digits[3] = {0};
-    if (convertToBcdArray(data, digits, bcd_digits) != 0) {
-        return; // Error en conversión
+    if (convertToBcdArray(data, digits, bcd_digits) != 0) { //convierte a BCD
+        return; // error en conversión
     }
 
     // Para cada ciclo de refresco, mostramos un dígito a la vez
     for (uint8_t pos = 0; pos < digits; pos++) {
         uint8_t digitValue = bcd_digits[pos];
 
-        // Seteo BCD del dígito actual
-        setBCDToGPIOs(digitValue, mapBcd);
+        setBCDToGPIOs(digitValue, mapBcd);         // Seteo BCD del dígito actual
+        
+        GPIOState(mapDigits[pos].pin, true);       // Activar el dígito correspondiente del display
 
-        // Activar el dígito correspondiente del display
-        GPIOState(mapDigits[pos].pin, true);
-
-        // Apagar el dígito previo
-        GPIOState(mapDigits[pos].pin, false);
+        GPIOState(mapDigits[pos].pin, false);      // Apagar el dígito
     }
 }
 
@@ -229,13 +229,10 @@ void app_main(void)
 {
     uint32_t value = 123;      /**< Valor decimal a mostrar en el display */
     uint8_t digits = 3;        /**< Número de dígitos del display */
-
-    // printf("Mostrando %u en display (3 digitos)\n", value);
     
     displayValueOnDigits(value, digits, bcdGpioMap, digitGpioMap);
-
 	while (1) {
-    }
+    }  // para evitar que el programa llegue a la última llave y se reinicie
 }
 
 /*==================[end of file]============================================*/

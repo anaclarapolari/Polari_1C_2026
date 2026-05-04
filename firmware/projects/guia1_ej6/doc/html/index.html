@@ -33,7 +33,7 @@
   <td id="projectalign">
    <div id="projectname">Proyecto 1 Ejercicio 6<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Display multiplexado con código BCD</div>
+   <div id="projectbrief">Display Multiplexado con Código BCD</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -102,15 +102,18 @@ $(function(){initNavTree('index.html','',''); });
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="genDesc"></a>
 General Description</h1>
-<p>Este programa implementa un sistema de multiplexación de display de 7 segmentos usando código BCD para controlar los segmentos. El ejercicio demuestra el funcionamiento de:</p><ul>
-<li>Conversión de números decimales a BCD</li>
-<li>Multiplexación de dígitos de display</li>
-<li>Control de GPIOs para configurar el BCD</li>
-<li>Control de GPIOs para seleccionar dígitos</li>
-</ul>
-<p>El programa muestra el valor 123 en un display de 3 dígitos.</p>
-<p><a href="https://drive.google.com/...">Operation Example</a></p>
-<h1 class="doxsection"><a class="anchor" id="hardConn"></a>
+<p>Resuelve el ejercicio 6 del proyecto 1: </p><pre class="fragment"> Escriba una función que reciba un dato de 32 bits,  la cantidad de dígitos de salida 
+ y dos vectores de estructuras del tipo  gpioConf_t. Uno  de estos vectores es igual al 
+ definido en el punto anterior y el otro vector mapea los puertos con el dígito del LCD 
+ a donde mostrar un dato:
+
+         Dígito 1 -&gt; GPIO_19
+         Dígito 2 -&gt; GPIO_18
+         Dígito 3 -&gt; GPIO_9
+
+ La función deberá mostrar por display el valor que recibe. Reutilice las funciones 
+ creadas en el punto 4 y 5. Realice la documentación de este ejercicio usando Doxygen.
+</pre><h1 class="doxsection"><a class="anchor" id="hardConn"></a>
 Hardware Connection</h1>
 <h2 class="doxsection"><a class="anchor" id="bcdPins"></a>
 Pines BCD (Segmentos del Display)</h2>
@@ -138,9 +141,7 @@ Pines de Selección de Dígitos</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter">Dígito 3  </td><td class="markdownTableBodyLeft">GPIO_9  </td></tr>
 </table>
-<dl class="section note"><dt>Nota</dt><dd>Los pines GPIO se configuran como salidas digitales (OUTPUT). </dd>
-<dd>
-El control de dígitos es activo en alto (HIGH = dígito activado).</dd></dl>
+<dl class="section note"><dt>Nota</dt><dd>Los pines GPIO se configuran como salidas digitales (OUTPUT).</dd></dl>
 <dl class="section author"><dt>Autor</dt><dd>Ana Clara Polari (<a href="#" onclick="location.href='mai'+'lto:'+'ana'+'.p'+'ola'+'ri'+'@in'+'ge'+'nie'+'ri'+'a.u'+'ne'+'r.e'+'du'+'.ar'; return false;">ana.p<span class="obfuscator">.nosp@m.</span>olar<span class="obfuscator">.nosp@m.</span>i@ing<span class="obfuscator">.nosp@m.</span>enie<span class="obfuscator">.nosp@m.</span>ria.u<span class="obfuscator">.nosp@m.</span>ner.<span class="obfuscator">.nosp@m.</span>edu.a<span class="obfuscator">.nosp@m.</span>r</a>) </dd></dl>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>

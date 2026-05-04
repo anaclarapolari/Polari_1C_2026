@@ -1,9 +1,13 @@
-/*! @mainpage Conversión de enteros a arreglo de dígitos (BCD).
+/*! @mainpage Proyecto 1 Ejercicio 4 -Conversión de enteros a arreglo de dígitos (BCD).
 
  * @section genDesc General Description
- *
- * El programa toma un número entero de 32 bits y lo descompone en sus dígitos 
- * decimales individuales, almacenándolos en un arreglo de bytes, y los muestra en consola.
+ * 
+ * Resuelve el ejercicio 4 del proyecto 1: 
+ * 
+ *      Escriba una función que reciba un dato de 32 bits,  la cantidad de dígitos de salida 
+ *      y un puntero a un arreglo donde se almacene los n dígitos. La función deberá convertir 
+ *      el dato recibido a BCD, guardando cada uno de los dígitos de salida en el arreglo 
+ *      pasado como puntero.
  *
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *

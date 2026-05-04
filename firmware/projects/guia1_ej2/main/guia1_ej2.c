@@ -1,11 +1,12 @@
-/*! @mainpage Blinking switch
+/*! @mainpage Proyecto 1 Ejercicio 2 - Blinking switch
  *
  * \section genDesc General Description
- *
- * Este ejemplo hace titilar los leds en función de las teclas.
- *  * LED1 titila mientras se mantiene pulsada SWITCH1.
- *  * LED2 titila mientras se mantiene pulsada SWITCH2.
- *  * LED3 titila cuando se mantienen simultáneamente ambas teclas.
+ * 
+ * Resuelve el ejercicio 2 del proyecto 1: 
+ * 
+ *      Modifique la aplicación 1_blinking_switch de manera de hacer titilar los leds 1 y 2 
+ *      al mantener presionada las teclas 1 y 2 correspondientemente. También se debe poder 
+ *      hacer titilar el led 3 al presionar simultáneamente las teclas 1 y 2. 
  *
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *

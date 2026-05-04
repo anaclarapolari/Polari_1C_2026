@@ -1,15 +1,19 @@
-/*! @mainpage Blinking switch con uso de estructuras
+/*! @mainpage Proyecto 1 Ejercicio 3 - Blinking switch con uso de estructuras
  *
  * @section genDesc General Description
  *
- * El programa permite controlar el estado de los LEDs (encendido, apagado o parpadeo) 
- * utilizando una estructura de datos. La función principal configura un LED 
- * específico para que realice una cantidad determinada de ciclos de parpadeo con un periodo.
+ * Resuelve el ejercicio 3 del proyecto 1: 
+ * 
+ *  	El programa permite controlar el estado de los LEDs (encendido, apagado o parpadeo) 
+ * 		utilizando una estructura de datos.
+ * 
+ *      Realice un función que reciba un puntero a una estructura LED como la que se muestra.
+ * 		Use como guía para la implementación el diagrama de flujo que se observa en la 
+ * 		carpeta doc.
  *
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *
  */
-
 /*==================[inclusions]=============================================*/
 
 #include <stdio.h>
