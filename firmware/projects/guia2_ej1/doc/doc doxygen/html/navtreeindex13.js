@@ -238,7 +238,6 @@ var NAVTREEINDEX13 =
 "ili9341_8h_source.html":[3,0,0,0,1,0,6],
 "index.html":[],
 "index.html":[0],
-"index.html#funcDesc":[0,2],
 "index.html#genDesc":[0,0],
 "index.html#hardConn":[0,1],
 "l293_8c.html":[3,0,0,0,1,1,7],
@@ -249,5 +248,6 @@ var NAVTREEINDEX13 =
 "l293_8c.html#a45c10761257fe9b986909363bec442a7":[3,0,0,0,1,1,7,3],
 "l293_8c.html#a594a434c0a3b20b83e831e4e1e767f3b":[3,0,0,0,1,1,7,4],
 "l293_8c.html#a76fe84d83b8d236bd4f0d20d7e2ed06f":[3,0,0,0,1,1,7,9],
-"l293_8c.html#abd07fcfd4e2395bed1eff37875839375":[3,0,0,0,1,1,7,8]
+"l293_8c.html#abd07fcfd4e2395bed1eff37875839375":[3,0,0,0,1,1,7,8],
+"l293_8c.html#ac8c0b3ab4b1036bb369de9b5d409b361":[3,0,0,0,1,1,7,5]
 };

@@ -21,9 +21,10 @@ var searchData=
   ['uartsendbuffer_18',['UartSendBuffer',['../group___u_a_r_t.html#ga81fce0b6465799566af3cc8cc896c45e',1,'UartSendBuffer(uart_mcu_port_t port, const char *data, uint8_t nbytes):&#160;uart_mcu.c'],['../group___u_a_r_t.html#ga81fce0b6465799566af3cc8cc896c45e',1,'UartSendBuffer(uart_mcu_port_t port, const char *data, uint8_t nbytes):&#160;uart_mcu.c']]],
   ['uartsendbyte_19',['UartSendByte',['../group___u_a_r_t.html#gaeb142fa2425b80bddba60121b1cf13f2',1,'UartSendByte(uart_mcu_port_t port, const char *data):&#160;uart_mcu.c'],['../group___u_a_r_t.html#gaeb142fa2425b80bddba60121b1cf13f2',1,'UartSendByte(uart_mcu_port_t port, const char *data):&#160;uart_mcu.c']]],
   ['uartsendstring_20',['UartSendString',['../group___u_a_r_t.html#ga60db217694ea24ad75fcedda3336a3a8',1,'UartSendString(uart_mcu_port_t port, const char *msg):&#160;uart_mcu.c'],['../group___u_a_r_t.html#ga60db217694ea24ad75fcedda3336a3a8',1,'UartSendString(uart_mcu_port_t port, const char *msg):&#160;uart_mcu.c']]],
-  ['unit_21',['unit',['../structprf__char__pres__fmt.html#a1e8ce93d382bc1a38b1d49f70acf0d24',1,'prf_char_pres_fmt']]],
-  ['up_22',['UP',['../ili9341_8c.html#a1965eaca47dbf3f87acdafc2208f04eb',1,'ili9341.c']]],
-  ['us2cm_23',['US2CM',['../hc__sr04_8c.html#a5e52844206c91ee47dcdf1697595b43a',1,'hc_sr04.c']]],
-  ['us2inch_24',['US2INCH',['../hc__sr04_8c.html#a34f3975d94758e78ddea4f3bcac2398b',1,'hc_sr04.c']]],
-  ['us_5fresolution_5fhz_25',['US_RESOLUTION_HZ',['../delay__mcu_8c.html#a0084affffdb426de14a2629cfe92c652',1,'US_RESOLUTION_HZ:&#160;delay_mcu.c'],['../timer__mcu_8c.html#a0084affffdb426de14a2629cfe92c652',1,'US_RESOLUTION_HZ:&#160;timer_mcu.c']]]
+  ['ultrasonido_21',['Proyecto 2 Ejercicio 1 - Medidor de distancia por ultrasonido',['../index.html',1,'']]],
+  ['unit_22',['unit',['../structprf__char__pres__fmt.html#a1e8ce93d382bc1a38b1d49f70acf0d24',1,'prf_char_pres_fmt']]],
+  ['up_23',['UP',['../ili9341_8c.html#a1965eaca47dbf3f87acdafc2208f04eb',1,'ili9341.c']]],
+  ['us2cm_24',['US2CM',['../hc__sr04_8c.html#a5e52844206c91ee47dcdf1697595b43a',1,'hc_sr04.c']]],
+  ['us2inch_25',['US2INCH',['../hc__sr04_8c.html#a34f3975d94758e78ddea4f3bcac2398b',1,'hc_sr04.c']]],
+  ['us_5fresolution_5fhz_26',['US_RESOLUTION_HZ',['../delay__mcu_8c.html#a0084affffdb426de14a2629cfe92c652',1,'US_RESOLUTION_HZ:&#160;delay_mcu.c'],['../timer__mcu_8c.html#a0084affffdb426de14a2629cfe92c652',1,'US_RESOLUTION_HZ:&#160;timer_mcu.c']]]
 ];

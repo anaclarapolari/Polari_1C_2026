@@ -1,26 +1,24 @@
 /*! @mainpage Proyecto 2 Ejercicio 2 - Medidor de distancia por ultrasonido con interrupciones
 
- * @section genDesc
- *
- * @section hardConn 
- *
- * @section funcDesc 
+ * @section genDesc Descripción General
+
+ * Resuelve el ejercicio 2 del proyecto 2: 
  * 
- * @section intDesc
+ *      Cree un nuevo proyecto en el que modifique la actividad del punto 1 de manera de 
+ *      utilizar interrupciones para el control de las teclas y el control de tiempos (Timers). 
  *
  * @author Ana Clara Polari (ana.polari@ingenieria.uner.edu.ar)
  *
  */
 
 /*==================[inclusions]=============================================*/
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <unistd.h>
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
 #include "led.h"
 #include "hc_sr04.h"
 #include "lcditse0803.h"
@@ -31,29 +29,48 @@
 
 /*==================[macros and definitions]=================================*/
 
-#define HC_SR04_ECHO_GPIO   GPIO_3
-#define HC_SR04_TRIGGER_GPIO GPIO_2
-
-#define DISTANCE_THRESHOLD_1 10
-#define DISTANCE_THRESHOLD_2 20
-#define DISTANCE_THRESHOLD_3 30
-
-#define MEASUREMENT_PERIOD_US 1000000  // 1 segundo
+#define HC_SR04_ECHO_GPIO    GPIO_3     /*!< GPIO asignado al pin de ECHO del sensor */
+#define HC_SR04_TRIGGER_GPIO GPIO_2     /*!< GPIO asignado al pin de TRIGGER del sensor */
+#define DISTANCE_THRESHOLD_1 10         /*!< Umbral de distancia menor (10 cm) */
+#define DISTANCE_THRESHOLD_2 20         /*!< Umbral de distancia medio (20 cm) */
+#define DISTANCE_THRESHOLD_3 30         /*!< Umbral de distancia mayor (30 cm) */
+#define MEASUREMENT_PERIOD_US 1000000  // 1 segundo en microsegundos
 
 /*==================[internal data definition]===============================*/
-static bool medida = false;      /*!< Flag para indicar si está midiendo */
-static bool hold_mode = false;   /*!< Flag para modo HOLD */
+
+static bool medida = false;      /*!< Para indicar si está midiendo */
+static bool hold_mode = false;   /*!< Para modo HOLD */
 static uint16_t last_distance = 0;  /*!< Última distancia medida */
 
 /*==================[internal functions declaration]=========================*/
+
+/**
+ * @brief Controla el encendido de LEDs en función de la distancia medida.
+ * @param distance Distancia medida en centímetros.
+ */
 static void ControlLedsBasedOnDistance(uint16_t distance);
 
-static void MeasurementTimerCallback(void *param);
-static void Switch1Callback(void *param);
-static void Switch2Callback(void *param);
+/**
+ * @brief Función de callback invocada por el timer para realizar la medición.
+ * @param param Puntero opcional a parámetros (no utilizado).
+ */
+static void MedirDistancia(void *param);
+
+/**
+ * @brief Función de interrupción asociada a la tecla 1 (TEC1).
+ * @param param Puntero opcional a parámetros (no utilizado).
+ */
+static void InterrupcionTEC1(void *param);
+
+/**
+ * @brief Función de interrupción asociada a la tecla 2 (TEC2).
+ * @param param Puntero opcional a parámetros (no utilizado).
+ */
+static void InterrupcionTEC2(void *param);
 
 /*==================[internal functions definition]==========================*/
-static void Switch1Callback(void *param) {
+
+static void InterrupcionTEC1(void *param) {
     medida = !medida;
     
     // Si se desactiva la medición, apagar todo
@@ -63,13 +80,13 @@ static void Switch1Callback(void *param) {
     }
 }
 
-static void Switch2Callback(void *param) {
+static void InterrupcionTEC2(void *param) {
     if (medida) {
         hold_mode = !hold_mode;
     }
 }
 
-static void MeasurementTimerCallback(void *param) {
+static void MedirDistancia(void *param) {
     if (medida) {
         // SIEMPRE leer la distancia (incluso en HOLD)
         last_distance = HcSr04ReadDistanceInCentimeters();
@@ -83,8 +100,6 @@ static void MeasurementTimerCallback(void *param) {
             if (last_distance <= 999) {
                 LcdItsE0803Write(last_distance);
             }
-    } else {
-            LcdItsE0803Write(last_distance);
         }
     }
 }
@@ -112,6 +127,9 @@ static void ControlLedsBasedOnDistance(uint16_t distance) {
 }
 
 /*==================[external functions definition]==========================*/
+/**
+ * @brief Función principal que inicializa periféricos, configura interrupciones y timers.
+ */
 void app_main(void) {
     
     // Inicializar LEDs
@@ -139,18 +157,19 @@ void app_main(void) {
         return;
     }
 
-    // Configurar interrupciones de switches con callbacks
-    SwitchActivInt(SWITCH_1, Switch1Callback, NULL);
-    SwitchActivInt(SWITCH_2, Switch2Callback, NULL);
+    // configuro interrupciones: paso la tecla, la función a ejecutar y argumentos no hay
+    // reemplazo la tarea que leía las teclas cada 10 ms
+    SwitchActivInt(SWITCH_1, InterrupcionTEC1, NULL);
+    SwitchActivInt(SWITCH_2, InterrupcionTEC2, NULL);
 
-    // Configurar timer para medición periódica (cada 1 segundo = 1,000,000 us)
+    // configuro timer cada 1 segundo. Cada un segundo se mide la distancia
     timer_config_t timer_config = {
         .timer = TIMER_A,
         .period = MEASUREMENT_PERIOD_US,
-        .func_p = MeasurementTimerCallback,
+        .func_p = MedirDistancia,
         .param_p = NULL
     };
-    TimerInit(&timer_config);
+    TimerInit(&timer_config); //le paso la dirección de memoria del timer que configuré recién
 	TimerStart(TIMER_A);
 }
 /*==================[end of file]============================================*/

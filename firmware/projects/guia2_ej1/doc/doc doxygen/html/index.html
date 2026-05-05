@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Proyecto 2 Ejercicio 1: Proyecto 2 Ejercicio 1 - Sensor de Distancia HC-SR04 con LEDs y LCD</title>
+<title>Proyecto 2 Ejercicio 1: Proyecto 2 Ejercicio 1 - Medidor de distancia por ultrasonido</title>
 <link rel="icon" href="icon.ico" type="image/x-icon" />
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -33,7 +33,7 @@
   <td id="projectalign">
    <div id="projectname">Proyecto 2 Ejercicio 1<span id="projectnumber">&#160;1.0</span>
    </div>
-   <div id="projectbrief">Sensor de Distancia HC-SR04 con LEDs y LCD</div>
+   <div id="projectbrief">Medidor de distancia por ultrasonido</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -97,13 +97,33 @@ $(function(){initNavTree('index.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Proyecto 2 Ejercicio 1 - Sensor de Distancia HC-SR04 con <a class="el" href="group___l_e_d.html#gab6831a7d06c0a2bc69f9b024f6445a80" title="LED driver for the ESP-EDU Board.">LEDs</a> y LCD </div></div>
+  <div class="headertitle"><div class="title">Proyecto 2 Ejercicio 1 - Medidor de distancia por ultrasonido </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="genDesc"></a>
 Descripción General</h1>
-<p>Aplicación que controla <a class="el" href="group___l_e_d.html#gab6831a7d06c0a2bc69f9b024f6445a80" title="LED driver for the ESP-EDU Board.">LEDs</a> según la distancia medida por sensor HC-SR04 y muestra la distancia en display LCD.</p>
-<h1 class="doxsection"><a class="anchor" id="hardConn"></a>
+<p>Resuelve el ejercicio 1 del proyecto 2: </p><pre class="fragment"> Diseñar el firmware modelando con un diagrama de flujo de manera que cumpla con las 
+ siguientes funcionalidades:
+
+* Mostrar distancia medida utilizando los leds de la siguiente manera:
+     Si la distancia es menor a 10 cm, apagar todos los LEDs.
+     Si la distancia está entre 10 y 20 cm, encender el LED_1.
+     Si la distancia está entre 20 y 30 cm, encender el LED_2 y LED_1.
+     Si la distancia es mayor a 30 cm, encender el LED_3, LED_2 y LED_1.
+
+* Mostrar el valor de distancia en cm utilizando el display LCD.
+
+* Usar TEC1 para activar y detener la medición.
+
+* Usar TEC2 para mantener el resultado (“HOLD”).
+
+* Refresco de medición: 1 s
+
+ Se deberá conectar a la EDU-ESP un sensor de ultrasonido HC-SR04 y una pantalla LCD y 
+ utilizando los drivers provistos por la cátedra implementar la aplicación correspondiente. 
+ Se debe subir al repositorio el código. Se debe incluir en la documentación, realizada 
+ con doxygen, el diagrama de flujo. 
+</pre><h1 class="doxsection"><a class="anchor" id="hardConn"></a>
 Conexión de Hardware</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -139,15 +159,6 @@ Conexión de Hardware</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter">Gnd  </td><td class="markdownTableBodyCenter">GND  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="funcDesc"></a>
-Descripción Funcional</h1>
-<ul>
-<li>Si distancia &lt; 10 cm: Apagar todos los <a class="el" href="group___l_e_d.html#gab6831a7d06c0a2bc69f9b024f6445a80" title="LED driver for the ESP-EDU Board.">LEDs</a></li>
-<li>Si 10 cm &lt;= distancia &lt; 20 cm: Encender LED_1 (verde)</li>
-<li>Si 20 cm &lt;= distancia &lt; 30 cm: Encender LED_1 y LED_2 (verde y amarillo)</li>
-<li>Si distancia &gt;= 30 cm: Encender LED_1, LED_2 y LED_3 (verde, amarillo y rojo)</li>
-<li>Mostrar distancia en cm en el display LCD</li>
-</ul>
 <dl class="section author"><dt>Autor</dt><dd>Ana Clara Polari (<a href="#" onclick="location.href='mai'+'lto:'+'ana'+'.p'+'ola'+'ri'+'@in'+'ge'+'nie'+'ri'+'a.u'+'ne'+'r.e'+'du'+'.ar'; return false;">ana.p<span class="obfuscator">.nosp@m.</span>olar<span class="obfuscator">.nosp@m.</span>i@ing<span class="obfuscator">.nosp@m.</span>enie<span class="obfuscator">.nosp@m.</span>ria.u<span class="obfuscator">.nosp@m.</span>ner.<span class="obfuscator">.nosp@m.</span>edu.a<span class="obfuscator">.nosp@m.</span>r</a>) </dd></dl>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>

@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "Proyecto 2 Ejercicio 1", "index.html", [
-    [ "Proyecto 2 Ejercicio 1 - Sensor de Distancia HC-SR04 con LEDs y LCD", "index.html", "index" ],
+    [ "Proyecto 2 Ejercicio 1 - Medidor de distancia por ultrasonido", "index.html", "index" ],
     [ "Topics", "topics.html", "topics" ],
     [ "Estructuras de datos", "annotated.html", [
       [ "Estructuras de datos", "annotated.html", "annotated_dup" ],
@@ -66,8 +66,8 @@ var NAVTREEINDEX =
 "group___m_p_u6050.html#ga1f1c02b773d610b316c91fa93d06598a",
 "group___m_p_u6050.html#ga8b5ca8697862a741632275a717631358",
 "group___neo_pixel___stripe.html#ga6671e70ff1d2d50e9051e81cc1f99223",
-"l293_8c.html#ac8c0b3ab4b1036bb369de9b5d409b361",
-"structhid__report__map__t.html#abdc686bdd97b9a0e12f56eb9720f4d0d"
+"l293_8c.html#adb97e4c966e121b68ae86c89f36fffdc",
+"structhid__report__map__t.html#af242d6e3b6108ea75e1eb236e94c8240"
 ];
 
 var SYNCONMSG = 'pulsar para deshabilitar sincronización';

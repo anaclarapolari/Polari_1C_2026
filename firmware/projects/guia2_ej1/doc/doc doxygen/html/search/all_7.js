@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['ejercicio_201_20sensor_20de_20distancia_20hc_20sr04_20con_20leds_20y_20lcd_0',['Proyecto 2 Ejercicio 1 - Sensor de Distancia HC-SR04 con LEDs y LCD',['../index.html',1,'']]],
+  ['ejercicio_201_20medidor_20de_20distancia_20por_20ultrasonido_0',['Proyecto 2 Ejercicio 1 - Medidor de distancia por ultrasonido',['../index.html',1,'']]],
   ['en_5f1_5f2_1',['EN_1_2',['../l293_8c.html#a594a434c0a3b20b83e831e4e1e767f3b',1,'l293.c']]],
   ['en_5f3_5f4_2',['EN_3_4',['../l293_8c.html#ac8c0b3ab4b1036bb369de9b5d409b361',1,'l293.c']]],
   ['en_5f3_5fgamma_3',['EN_3_GAMMA',['../ili9341_8c.html#a27a2a53c2b01e4dd42e91cddecc41442',1,'ili9341.c']]],
